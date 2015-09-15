@@ -2,6 +2,87 @@
 #include "badgealpha.h"
 #include "fdserial.h"
 
+id_address = 65335;
+
+char id[7];
+info their;
+info message;
+
+void main()
+{
+  // Initialize badge
+  badge_setup();
+  
+  // Initialize IR
+  leds_set(0b111111);
+  ir_start();
+  pause(500);
+  leds_set(0b000000);
+  clear();
+  
+  // Pull ID from EEPROM
+  ee_getStr(id, 7, id_address);
+  
+  
+    
+  while(1)
+  {
+    if (check_inbox() == 1)
+    {
+      message_get(&their);
+      if (strcmp(their.name, id) == 0)
+      {
+        clear();
+        char_size(SMALL);
+        cursor(2, 1);
+        display("GOT MESSAGE!");
+        cursor(0, 3);
+        display(their.email);
+        cursor(0, 6);
+        display("OSH to continue.");
+        while(pad(6) != 1);
+        clear();
+      }
+      rgb(L, OFF);
+      rgb(R, OFF);
+    }      
+    char_size(SMALL);
+    cursor(3, 1);
+    display("ID: ");
+    cursor(7, 1);
+    display(id);
+    char_size(BIG);
+    cursor(0, 1);
+    display("Waiting.");
+    print("Enter recipient: ");
+    getStr(text, 6);
+    strcpy(message.name, text);
+    print("Enter instant message: ");
+    getStr(text, 15);
+    strcpy(message.email, text);
+    clear();
+    char_size(SMALL);
+    cursor(3, 1);
+    display("Sending...");
+    cursor(0, 2);
+    display(text);
+    led(4, ON); 
+    led(1, ON);
+    rgb(L, BLUE);
+    rgb(R, BLUE);
+    ir_send(&message);
+    rgb(L, OFF);
+    rgb(R, OFF);
+    cursor(6, 4);
+    display("DONE");
+    led(4, OFF);
+    led(1, OFF);
+    pause(500);
+    clear();
+  }    
+}  
+
+/*
 info my = {{" "}, {"INFO"}, 0};
 info my_init = {{" "}, {"INIT"}, 0};
 info my_resp = {{" "}, {"RESP"}, 0};
@@ -48,31 +129,7 @@ void main()
   
   while(1)
   {
-    memset(&their, 0, sizeof(info));
-    print("Enter instant message: ");                 // User prompt
-    getStr(text, 15);                           // Text string, max 15 characters
-    print("You typed: %s \n", text);
-    //if (pad(1) == 1 && pad(4) == 1)
-    //{
-      strcpy(my_init.email, text);
-      clear();
-      cursor(3, 1);
-      display("Sending...");
-      cursor(0, 2);
-      display(text);
-      led(4, ON); 
-      led(1, ON);
-      rgb(L, BLUE);
-      rgb(R, BLUE);
-      ir_send(&my_init);
-      rgb(L, OFF);
-      rgb(R, OFF);
-      cursor(6, 4);
-      display("DONE");
-      cursor(3, 6);
-      display("Waiting...");      
-      led(4, OFF);
-      led(1, OFF);
+    
       
       int t = CNT;
       int dt = CLKFREQ * 2;
@@ -149,4 +206,4 @@ void main()
     }      
   }    
 }  
-
+*/
