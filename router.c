@@ -8,6 +8,7 @@ char p_addr[2] = "47";
 char* p_addr_to;
 
 int x, y, z;  // Accelerometer
+int data_in = 0;
 
 void screen_img180();
 void screen_img(char *imgaddr);
@@ -23,8 +24,8 @@ void main()
   pause(200);
   clear();
   
-  char_size(SMALL);
   memset(&p_addr_to, 0, 2);
+  char_size(SMALL);
   leds_set(0b000000);
   
   while(1)
@@ -34,11 +35,14 @@ void main()
     {
       clear();
       screen_autoUpdate(OFF);
-      char_size(SMALL);
-      cursor(0, 0);
-      display("go to");
-      cursor(0, 1);
-      display(p_addr_to);
+      char_size(BIG);
+      cursor(1, 0);
+      display("GO  TO");
+      if (data_in)
+      {
+       cursor(2, 1);
+       display(p_addr_to);
+      }      
       screen_img180();
       screen_autoUpdate(ON);
       while(y < -35)
@@ -59,6 +63,7 @@ void main()
       display("looking up");
       message_get(&their);
       p_addr_to = logicalToPhysicalLookup(their.name, l_addr);
+      data_in = 1;
       pause(200);
       rgb(L, OFF);
       rgb(R, OFF);
@@ -68,7 +73,9 @@ void main()
     {
       // default screen
       char_size(BIG);
-      cursor(0, 0);
+      cursor(1, 0);
+      display("ROUTER");
+      cursor(3, 1);
       display(p_addr);
     }      
   }

@@ -1,11 +1,11 @@
 #include "simpletools.h"
 #include "badgealpha.h"
-#include "fdserial.h"
+#include "humanlogical.h"
 
-int id_address = 65335;
 int ir_attempts = 1;
 
-char id[7];
+char* l_addr;
+char* h_addr;
 info their;
 info message;
 
@@ -19,17 +19,30 @@ void main()
   ir_start();
   pause(200);
   clear();
-  
-  // Pull ID from EEPROM
-  ee_getStr(id, 7, id_address);
   leds_set(0b000000);
+  
+  memset(h_addr, 0, 7);
+  memset(l_addr, 0, 8);
+  
+  // Set username
+  do
+  {
+    print("Enter new username: ");
+    getStr(h_addr, 6);
+    l_addr = humanToLogicalLookup(h_addr);
+    if (strcmp(l_addr, "000.000") == 0) {
+      print("Name not found, try again.\n");
+    }      
+  } while(strcmp(l_addr, "000.000") == 0);   
     
   while(1)
   {
+    memset(&their, 0, sizeof(info));
+    memset(&message, 0, sizeof(info));
     if (check_inbox() == 1)
     {
       message_get(&their);
-      if (strcmp(their.name, id) == 0)
+      if (strcmp(their.name, l_addr) == 0)
       {
         clear();
         char_size(SMALL);
@@ -49,13 +62,13 @@ void main()
     cursor(3, 1);
     display("ID: ");
     cursor(7, 1);
-    display(id);
+    display(h_addr);
     char_size(BIG);
     cursor(0, 1);
     display("Waiting.");
     print("Enter recipient: ");
     getStr(text, 6);
-    strcpy(message.name, text);
+    strcpy(message.name, humanToLogicalLookup(text));
     print("Enter instant message: ");
     getStr(text, 15);
     strcpy(message.email, text);
