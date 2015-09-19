@@ -1,4 +1,3 @@
-// Replace physical numbers with human names
 char* humanToLogicalLookup(char* recname)
 {
 	if (strcmp(recname, "adder") == 0) {

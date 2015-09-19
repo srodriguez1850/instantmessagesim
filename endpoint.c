@@ -40,21 +40,18 @@ void main()
     
   while(1)
   {
-    //char finalmessage[141];
     memset(&their, 0, sizeof(info));
     memset(&message, 0, sizeof(info));
     displayEndpoint();
     print("Enter recipient: ");
     getStr(text, 6);
     strcpy(message.name, humanToLogicalLookup(text));
-    /*strncpy(message.name, humanToLogicalLookup(text), 6);
-    strncpy(finalmessage, text, 6);*/
+    strcpy(message.email, text);
     print("Enter instant message: ");
-    getStr(text, 64);
+    getStr(text, 62);
+    strcat(message.email, ": ");
     strcat(message.email, text);
-    /*strncat(finalmessage, ": ", 2);
-    strncat(finalmessage, text, 134);
-    strncpy(message.email, finalmessage, 140);*/
+    strcat(message.email, "\0");
     clear();
     char_size(SMALL);
     cursor(3, 3);
