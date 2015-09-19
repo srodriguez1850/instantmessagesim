@@ -2,6 +2,8 @@
 #include "badgealpha.h"
 #include "logicalphysical.h"
 
+// Need to burn address
+
 info their;
 char l_addr[7] = "100.111";
 char p_addr[2] = "47";
