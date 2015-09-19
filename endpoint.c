@@ -46,9 +46,9 @@ void main()
     print("Enter recipient: ");
     getStr(text, 6);
     strcpy(message.name, humanToLogicalLookup(text));
-    strcpy(message.email, text);
     print("Enter instant message: ");
     getStr(text, 62);
+    strcpy(message.email, h_addr);
     strcat(message.email, ": ");
     strcat(message.email, text);
     strcat(message.email, "\0");
