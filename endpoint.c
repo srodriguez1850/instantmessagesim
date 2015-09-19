@@ -39,6 +39,8 @@ void main()
   {
     memset(&their, 0, sizeof(info));
     memset(&message, 0, sizeof(info));
+    //check if there's an available IR message
+    //if there is, use message_get to read it
     if (check_inbox() == 1)
     {
       message_get(&their);
