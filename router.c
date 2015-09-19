@@ -57,12 +57,9 @@ void main()
       // Check incoming data from packet
       // Check destination with database
       // Then redirect to router/endpoint
-      clear();
-      char_size(SMALL);
-      cursor(0, 0);
-      display("looking up");
       message_get(&their);
-      p_addr_to = logicalToPhysicalLookup(their.name, l_addr);
+      p_addr_to = logicalToPhysicalConvert(their.name);
+      //p_addr_to = logicalToPhysicalLookup(their.name, l_addr); // runs out of memory
       data_in = 1;
       pause(200);
       rgb(L, OFF);
