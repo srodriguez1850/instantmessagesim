@@ -58,8 +58,8 @@ void main()
       // Check destination with database
       // Then redirect to router/endpoint
       message_get(&their);
-      p_addr_to = logicalToPhysicalConvert(their.name);
-      //p_addr_to = logicalToPhysicalLookup(their.name, l_addr); // runs out of memory
+      //p_addr_to = logicalToPhysicalConvert(their.name);
+      p_addr_to = logicalToPhysicalLookup(their.name, l_addr); // runs out of memory
       data_in = 1;
       pause(200);
       rgb(L, OFF);

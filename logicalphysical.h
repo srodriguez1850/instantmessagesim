@@ -1,5 +1,6 @@
 char* logicalToPhysicalLookup(char* recname, char* routname)
 {
+	// 47
 	if (strcmp(routname, "100.111") == 0) {
 		if (strcmp(recname, "100.001") == 0) {
 			return "41";
@@ -16,6 +17,7 @@ char* logicalToPhysicalLookup(char* recname, char* routname)
 		else return "57";
 	}
 
+	// 57
 	else if (strcmp(routname, "101.111") == 0) {
 		if (strcmp(recname, "101.001") == 0) {
 			return "51";
@@ -32,6 +34,7 @@ char* logicalToPhysicalLookup(char* recname, char* routname)
 		else return "67";
 	}
 
+	// 67
 	else if (strcmp(routname, "110.111") == 0) {
 		if (strcmp(recname, "110.001") == 0) {
 			return "61";
@@ -46,6 +49,138 @@ char* logicalToPhysicalLookup(char* recname, char* routname)
 			return "41";
 		}
 		else return "47";
+	}
+
+	// 44
+	else if (strcmp(routname, "100.100") == 0) {
+		if (strcmp(recname, "110.001") == 0) {
+			return "61";
+		}
+		else if (strcmp(recname, "100.001") == 0) {
+			return "41";
+		}
+		else return "47";
+	}
+
+	// 45
+	else if (strcmp(routname, "100.101") == 0) {
+		if (strcmp(recname, "110.010") == 0) {
+			return "62";
+		}
+		else if (strcmp(recname, "100.010") == 0) {
+			return "42";
+		}
+		else return "57";
+	}
+
+	// 46
+	else if (strcmp(routname, "100.110") == 0) {
+		if (strcmp(recname, "100.001") == 0) {
+			return "41";
+		}
+		else if (strcmp(recname, "101.001") == 0) {
+			return "51";
+		}
+		else return "67";
+	}
+
+	// 54
+	else if (strcmp(routname, "101.100") == 0) {
+		if (strcmp(recname, "100.010") == 0) {
+			return "42";
+		}
+		else if (strcmp(recname, "101.010") == 0) {
+			return "52";
+		}
+		else return "47";
+	}
+
+	// 55
+	else if (strcmp(routname, "101.101") == 0) {
+		if (strcmp(recname, "101.001") == 0) {
+			return "51";
+		}
+		else if (strcmp(recname, "110.001") == 0) {
+			return "61";
+		}
+		else return "57";
+	}
+
+	// 56
+	else if (strcmp(routname, "101.110") == 0) {
+		if (strcmp(recname, "101.010") == 0) {
+			return "52";
+		}
+		else if (strcmp(recname, "110.010") == 0) {
+			return "62";
+		}
+		else return "67";
+	}
+
+	// 64
+	else if (strcmp(routname, "110.100") == 0) {
+		if (strcmp(recname, "110.010") == 0) {
+			return "62";
+		}
+		else if (strcmp(recname, "100.001") == 0) {
+			return "41";
+		}
+		else return "47";
+	}
+
+	// 65
+	else if (strcmp(routname, "110.101") == 0) {
+		if (strcmp(recname, "110.001") == 0) {
+			return "61";
+		}
+		else if (strcmp(recname, "100.010") == 0) {
+			return "42";
+		}
+		else return "57";
+	}
+
+	// 66
+	else if (strcmp(routname, "110.110") == 0) {
+		if (strcmp(recname, "100.010") == 0) {
+			return "42";
+		}
+		else if (strcmp(recname, "101.001") == 0) {
+			return "51";
+		}
+		else return "67";
+	}
+
+	// 74
+	else if (strcmp(routname, "111.100") == 0) {
+		if (strcmp(recname, "100.001") == 0) {
+			return "41";
+		}
+		else if (strcmp(recname, "101.010") == 0) {
+			return "52";
+		}
+		else return "47";
+	}
+
+	// 75
+	else if (strcmp(routname, "100.101") == 0) {
+		if (strcmp(recname, "101.010") == 0) {
+			return "52";
+		}
+		else if (strcmp(recname, "110.001") == 0) {
+			return "61";
+		}
+		else return "57";
+	}
+
+	// 76
+	else if (strcmp(routname, "111.110") == 0) {
+		if (strcmp(recname, "101.001") == 0) {
+			return "51";
+		}
+		else if (strcmp(recname, "110.010") == 0) {
+			return "62";
+		}
+		else return "67";
 	}
 
 	else return "00";
