@@ -1,35 +1,35 @@
 // Replace physical numbers with human names
 char* humanToLogicalLookup(char* recname)
 {
-	if (strcmp(recname, "user1") == 0) {
+	if (strcmp(recname, "adder") == 0) {
 		return "100.001";
 	}
 
-	else if (strcmp(recname, "user2") == 0) {
+	else if (strcmp(recname, "bear") == 0) {
 		return "100.010";
 	}
 
-	else if (strcmp(recname, "user3") == 0) {
+	else if (strcmp(recname, "cat") == 0) {
 		return "101.001";
 	}
 
-	else if (strcmp(recname, "user4") == 0) {
+	else if (strcmp(recname, "deer") == 0) {
 		return "101.010";
 	}
 
-	else if (strcmp(recname, "user5") == 0) {
+	else if (strcmp(recname, "eagle") == 0) {
 		return "110.001";
 	}
 
-	else if (strcmp(recname, "user6") == 0) {
+	else if (strcmp(recname, "fox") == 0) {
 		return "110.010";
 	}
 
-	else if (strcmp(recname, "user7") == 0) {
+	else if (strcmp(recname, "goat") == 0) {
 		return "111.001";
 	}
 
-	else if (strcmp(recname, "user8") == 0) {
+	else if (strcmp(recname, "hawk") == 0) {
 		return "111.010";
 	}
 

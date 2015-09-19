@@ -3,6 +3,7 @@
 #include "humanlogical.h"
 
 int ir_attempts = 1;
+char cmd[1];
 
 char* l_addr;
 char* h_addr;
@@ -21,6 +22,8 @@ void main()
   clear();
   leds_set(0b000000);
   
+  // Initialize address memory
+  
   memset(h_addr, 0, 7);
   memset(l_addr, 0, 8);
   
@@ -37,47 +40,25 @@ void main()
     
   while(1)
   {
+    //char finalmessage[141];
     memset(&their, 0, sizeof(info));
     memset(&message, 0, sizeof(info));
-    if (check_inbox() == 1)
-    {
-      message_get(&their);
-      if (strcmp(their.name, l_addr) == 0)
-      {
-        clear();
-        char_size(SMALL);
-        cursor(2, 1);
-        display("GOT MESSAGE!");
-        cursor(0, 3);
-        display(their.email);
-        cursor(0, 6);
-        display("OSH to continue.");
-        while(pad(6) != 1);
-        clear();
-      }
-      rgb(L, OFF);
-      rgb(R, OFF);
-    }      
-    char_size(SMALL);
-    cursor(3, 1);
-    display("ID: ");
-    cursor(7, 1);
-    display(h_addr);
-    char_size(BIG);
-    cursor(0, 1);
-    display("Waiting.");
+    displayEndpoint();
     print("Enter recipient: ");
     getStr(text, 6);
     strcpy(message.name, humanToLogicalLookup(text));
+    /*strncpy(message.name, humanToLogicalLookup(text), 6);
+    strncpy(finalmessage, text, 6);*/
     print("Enter instant message: ");
-    getStr(text, 15);
-    strcpy(message.email, text);
+    getStr(text, 64);
+    strcat(message.email, text);
+    /*strncat(finalmessage, ": ", 2);
+    strncat(finalmessage, text, 134);
+    strncpy(message.email, finalmessage, 140);*/
     clear();
     char_size(SMALL);
-    cursor(3, 1);
+    cursor(3, 3);
     display("Sending...");
-    cursor(0, 2);
-    display(text);
     for (int i = 0; i < ir_attempts; i++)
     {
       rgb(L, BLUE);
@@ -87,9 +68,88 @@ void main()
       rgb(R, OFF);
       pause(100);
     }      
-    cursor(6, 4);
+    cursor(6, 5);
     display("DONE");
-    pause(3000);
+    print("Message sent!\n");
+    pause(500);
+    clear();
+    int done = 0;
+    while (done == 0)
+    {
+      displayEndpoint();
+      print("[S]end message / [R]esend / [C]heck inbox\n");
+      getStr(cmd, 1);
+      
+      if (strcmp(cmd, "S") == 0 || strcmp(cmd, "s") == 0) {
+        print("\n");
+        done = 1;
+      }
+      else if (strcmp(cmd, "R") == 0 || strcmp(cmd, "r") == 0) {
+        print(" -- Resending the last message...\n");
+        clear();
+        char_size(SMALL);
+        cursor(3, 3);
+        display("Sending...");
+        for (int i = 0; i < ir_attempts; i++)
+        {
+          rgb(L, BLUE);
+          rgb(R, BLUE);
+          ir_send(&message);
+          rgb(L, OFF);
+          rgb(R, OFF);
+          pause(100);
+        }
+        cursor(6, 5);
+        display("DONE");
+        pause(500);
+        clear();
+      }
+      else if (strcmp(cmd, "C") == 0 || strcmp(cmd, "c") == 0) {
+        print(" -- Checking inbox...\n");
+        if (check_inbox() == 1)
+        {
+          message_get(&their);
+          if (strcmp(their.name, l_addr) == 0)
+          {
+            clear();
+            char_size(SMALL);
+            cursor(2, 4);
+            display("GOT MESSAGE!");
+            print(their.email);
+            print("\n");
+            pause(1000);
+            clear();
+          }
+          rgb(L, OFF);
+          rgb(R, OFF);
+        }
+        else
+        {
+          clear();
+          char_size(SMALL);
+          cursor(2, 4);
+          display("NO MESSAGES!");
+          print("No messages found.\n");
+          pause(1000);
+          clear();
+        }          
+      }      
+      else {
+        print("\nCommand not recognized; try again\n");
+      }
+    }      
     clear();
   }    
+}
+
+void displayEndpoint()
+{
+  char_size(SMALL);
+  cursor(3, 1);
+  display("ID: ");
+  cursor(7, 1);
+  display(h_addr);
+  char_size(BIG);
+  cursor(0, 1);
+  display("ENDPOINT");
 }  

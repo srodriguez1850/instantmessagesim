@@ -40,7 +40,7 @@ void main()
       display("GO  TO");
       if (data_in)
       {
-       cursor(2, 1);
+       cursor(3, 1);
        display(p_addr_to);
       }      
       screen_img180();

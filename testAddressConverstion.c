@@ -34,10 +34,10 @@ int convert(char* logname)
 		last[i] = address[i + 4];
 	}
 
-  for (int j = 0; j<3; j++)
+  for (int j = 0; j < 3; j++)
   {
-    if (first[j]=='1') {i_first += 0b00000001 << (2-j);}
-    if (last[j] =='1') {i_last += 0b00000001 << (2-j);}
+    if (first[j] == '1') { i_first += 0b00000001 << (2-j); }
+    if (last[j] == '1') { i_last += 0b00000001 << (2-j); }
   }    
 	i_p_address = (i_first * 10) + i_last;
 

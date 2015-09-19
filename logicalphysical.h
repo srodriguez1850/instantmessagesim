@@ -186,8 +186,7 @@ char* logicalToPhysicalLookup(char* recname, char* routname)
 	else return "00";
 }
 
-/*
-char* logicalToPhysicalConvert(char* logname)
+int logicalToPhysicalConvert(char* logname)
 {
 	char address[7];
 	char first[3];
@@ -204,10 +203,14 @@ char* logicalToPhysicalConvert(char* logname)
 		last[i] = address[i + 4];
 	}
 
-	i_first = strtol(first, NULL, 2);
-	i_last = strtol(last, NULL, 2);
+	for (int j = 0; j < 3; j++)
+  	{
+	    if (first[j] == '1') { i_first += 0b00000001 << (2 - j); }
+	    if (last[j] == '1') { i_last += 0b00000001 << (2 - j); }
+  	}    
 	i_p_address = (i_first * 10) + i_last;
-	sprintf(p_address, "%d", i_p_address);
 
-	return p_address;
-}*/
+	return i_p_address;
+}
+
+// array for lookup table

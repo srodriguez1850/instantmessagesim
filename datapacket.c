@@ -1,6 +1,5 @@
 #include "simpletools.h"
 #include "badgealpha.h"
-#include "fdserial.h"
 
 int havemessage = 0;
 
@@ -109,3 +108,5 @@ void main()
     }
   }
 }
+
+// 128x15, display when flipping
