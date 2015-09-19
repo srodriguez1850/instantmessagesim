@@ -1,4 +1,4 @@
-/*char* logicalToPhysicalLookup(char* recname, char* routname)
+char* logicalToPhysicalLookup(char* recname, char* routname)
 {
 	if (strcmp(routname, "100.111") == 0) {
 		if (strcmp(recname, "100.001") == 0) {
@@ -49,8 +49,9 @@
 	}
 
 	else return "00";
-}*/
+}
 
+/*
 char* logicalToPhysicalConvert(char* logname)
 {
 	char address[7];
@@ -74,4 +75,4 @@ char* logicalToPhysicalConvert(char* logname)
 	sprintf(p_address, "%d", i_p_address);
 
 	return p_address;
-}
+}*/
