@@ -186,6 +186,7 @@ char* logicalToPhysicalLookup(char* recname, char* routname)
 	else return "00";
 }
 
+/*
 int logicalToPhysicalConvert(char* logname)
 {
 	char address[7];
@@ -211,6 +212,4 @@ int logicalToPhysicalConvert(char* logname)
 	i_p_address = (i_first * 10) + i_last;
 
 	return i_p_address;
-}
-
-// array for lookup table
+}*/

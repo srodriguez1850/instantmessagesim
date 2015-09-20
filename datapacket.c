@@ -89,6 +89,7 @@ void main()
     }
     else if (pad(1) == 1 && pad(4) == 1 && havemessage == 1)
     {
+      // send data, increase hop counter
       clear();
       cursor(0, 4);
       display("Sending data....");
@@ -187,6 +188,7 @@ void initializeHopCounters()
 
 void displayHopCounters()
 {
+  // BUG: if there's an overflow, the null (0) terminator cuts off the display
   char_size(SMALL);
   cursor(0, 0);
   for (int i = 0; i < hop_index + 1; i++)

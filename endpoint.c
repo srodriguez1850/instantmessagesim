@@ -23,7 +23,6 @@ void main()
   leds_set(0b000000);
   
   // Initialize address memory
-  
   memset(h_addr, 0, 7);
   memset(l_addr, 0, 8);
   

@@ -2,7 +2,8 @@
 #include "badgealpha.h"
 #include "logicalphysical.h"
 
-// Need to burn address
+// NEED TO IMPLEMENT RETRIEVAL OF PHYSICAL ADDRESS FROM EEPROM
+// Alternatively, you can just hardcode it by changing l_addr and p_addr
 
 info their;
 char l_addr[7] = "100.111";
@@ -56,11 +57,8 @@ void main()
     }
     else if (check_inbox() == 1)
     {
-      // Check incoming data from packet
-      // Check destination with database
-      // Then redirect to router/endpoint
       message_get(&their);
-      //p_addr_to = logicalToPhysicalConvert(their.name);
+      //p_addr_to = logicalToPhysicalConvert(their.name); // uncomment in logicalphysical.h
       p_addr_to = logicalToPhysicalLookup(their.name, l_addr);
       data_in = 1;
       pause(200);
