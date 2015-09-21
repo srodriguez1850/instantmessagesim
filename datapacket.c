@@ -93,7 +93,7 @@ void main()
       clear();
       cursor(0, 4);
       display("Sending data....");
-      hop_counter[hop_index]++;
+      if (hop_counter[hop_index] < 15) hop_counter[hop_index]++;
       rgb(L, BLUE);
       rgb(R, BLUE);
       ir_send(&storage);
@@ -188,7 +188,6 @@ void initializeHopCounters()
 
 void displayHopCounters()
 {
-  // BUG: if there's an overflow, the null (0) terminator cuts off the display
   char_size(SMALL);
   cursor(0, 0);
   for (int i = 0; i < hop_index + 1; i++)
