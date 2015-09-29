@@ -6,8 +6,8 @@
 // Alternatively, you can just hardcode it by changing l_addr and p_addr
 
 info their;
-char l_addr[7] = "100.111";
-char p_addr[2] = "47";
+char l_addr[7] = "110.111";
+char p_addr[2] = "67";
 char* p_addr_to;
 
 int x, y, z;  // Accelerometer
